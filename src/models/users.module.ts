@@ -6,8 +6,10 @@ import {
   PrimaryKey,
   AutoIncrement,
   Unique,
+  BelongsToMany,
 } from 'sequelize-typescript';
-
+import UserCourses from './user-courses.module';
+import Course from './courses.module';
 @Table({
   tableName: 'users',
   timestamps: true,
@@ -45,6 +47,9 @@ class User extends Model {
     allowNull: false,
   })
   password!: string;
+
+  @BelongsToMany(() => Course, () => UserCourses)
+  courses!: Course[];
 }
 
 export default User;
